@@ -20,7 +20,7 @@ const app = new Elysia()
   .use(pages.settings)
   .use(pages.submit)
   .get("/public/style.css", () => file("./public/style.css"))
-  .get("/public/bitconnect.png", () => file("./public/bitconnect.png"))
+  .get("/public/sceneconnect.png", () => file("./public/sceneconnect.png"))
   .get("/public/favicon.png", () => file("./public/favicon.png"))
   .onError(({error}) => {
     console.error(error);
