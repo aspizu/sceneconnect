@@ -1,6 +1,4 @@
-import staticPlugin from "@elysiajs/static";
-import {Elysia} from "elysia";
-import FS from "fs/promises";
+import {Elysia, file} from "elysia";
 import {base} from "./base";
 import * as environment from "./environment";
 import * as pages from "./pages";
@@ -21,15 +19,9 @@ const app = new Elysia()
   .use(pages.register)
   .use(pages.settings)
   .use(pages.submit)
-  .use(
-    staticPlugin({
-      alwaysStatic: true,
-      prefix: "/public",
-      assets: "public",
-      indexHTML: true,
-      noCache: true,
-    }),
-  )
+  .get("/public/style.css", () => file("./public/style.css"))
+  .get("/public/bitconnect.png", () => file("./public/bitconnect.png"))
+  .get("/public/favicon.png", () => file("./public/favicon.png"))
   .onError(({error}) => {
     console.error(error);
   })
@@ -41,10 +33,3 @@ const app = new Elysia()
 export type App = typeof app;
 
 console.log(` Listening at http://${environment.HOSTNAME}:${environment.PORT}`);
-
-console.log(
-  "cwd",
-  process.cwd(),
-  "fs",
-  (await FS.readdir("./public/", {recursive: true})).join(", "),
-);
