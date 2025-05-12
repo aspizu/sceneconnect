@@ -1,4 +1,5 @@
 import {Elysia} from "elysia";
+import FS from "fs/promises";
 import {base} from "./base";
 import * as environment from "./environment";
 import * as pages from "./pages";
@@ -30,3 +31,5 @@ const app = new Elysia()
 export type App = typeof app;
 
 console.log(` Listening at http://${environment.HOSTNAME}:${environment.PORT}`);
+
+console.log("cwd", process.cwd(), "fs", (await FS.readdir(".")).join(", "));
