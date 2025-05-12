@@ -32,4 +32,9 @@ export type App = typeof app;
 
 console.log(` Listening at http://${environment.HOSTNAME}:${environment.PORT}`);
 
-console.log("cwd", process.cwd(), "fs", (await FS.readdir(".")).join(", "));
+console.log(
+  "cwd",
+  process.cwd(),
+  "fs",
+  (await FS.readdir("./public/", {recursive: true})).join(", "),
+);
