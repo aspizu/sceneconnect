@@ -35,6 +35,7 @@ export const home = new Elysia({name: "page.home"})
       post.created_at,
       username,
       positive,
+      (select count(*) from comment where post = post.id) as comments,
       post.id as id
     from
       post
@@ -57,7 +58,7 @@ export const home = new Elysia({name: "page.home"})
                 <div class="flex gap-2 text-sm text-neutral-500">
                   <span class="font-semibold">{post.votes} points</span>
                   <Link href={`/post/${post.id}`} class="text-neutral-500">
-                    comments
+                    {post.comments} comments
                   </Link>
                   <span class="font-semibold">{post.username}</span>
                   <span>{formatDistanceToNow(post.created_at)} ago</span>

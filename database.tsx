@@ -1,4 +1,4 @@
-import {SQL} from "bun";
+import postgres from "postgres";
 import * as environment from "./environment";
 
-export const sql = new SQL({url: environment.DATABASE});
+export const sql = postgres(environment.DATABASE);
