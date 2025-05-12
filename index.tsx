@@ -1,3 +1,4 @@
+import staticPlugin from "@elysiajs/static";
 import {Elysia} from "elysia";
 import FS from "fs/promises";
 import {base} from "./base";
@@ -20,6 +21,15 @@ const app = new Elysia()
   .use(pages.register)
   .use(pages.settings)
   .use(pages.submit)
+  .use(
+    staticPlugin({
+      alwaysStatic: true,
+      prefix: "/public",
+      assets: "public",
+      indexHTML: true,
+      noCache: true,
+    }),
+  )
   .onError(({error}) => {
     console.error(error);
   })
